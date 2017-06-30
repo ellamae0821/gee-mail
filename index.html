@@ -2,17 +2,130 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
+		<link href="https://fonts.googleapis.com/css?family=Sintony|Roboto" rel="stylesheet">
+		<title>Ella's Geemail</title>
     <script>
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
+        	for(var i=0; i<window.geemails.length; i++){ 
+
+        			var emailWrapper = document.createElement("div");
+			        emailWrapper.className = "eBox";
+			        document.body.appendChild(emailWrapper);
+
+			        var emailSender = document.createElement("div");
+			        emailSender.className = "eSender";
+			        emailSender.innerHTML = window.geemails[i].sender;
+			        emailWrapper.appendChild(emailSender);	 
+
+			        var emailSubject = document.createElement("div");
+			        emailSubject.className = "eSubject";
+			        emailSubject.innerHTML = window.geemails[i].subject;
+			        emailWrapper.appendChild(emailSubject); 
+
+			        var emailDate = document.createElement("div");
+			        emailDate.className = "eDate";
+			        emailDate.innerHTML = window.geemails[i].date;
+			        emailWrapper.appendChild(emailDate);
+			        
+			      	
+			        emailWrapper.addEventListener("click", showMail);
+
+
+			        var emailContent = document.createElement("p");
+			        emailContent.className = "eMessage";
+			        emailContent.innerHTML = window.geemails[i].body;
+			        emailSubject.appendChild(emailContent);
+
+
+			        function showMail(){
+			        	var showMessage = this.querySelectorAll(".eMessage")[0];
+			        	if (showMessage.style.display === "none"){
+			        		showMessage.style.display = "block";
+			        	}else{
+			        		showMessage.style.display = "none";
+	        			}
+
+	        		}		
+	        
+     		}
+
+//FOR COUNTER
+
+		     var inboxCount = document.getElementById("counter");
+		     inboxCount.innerHTML =  "All Messages " + "[ " +geemails.length++ + " ]";
+
+
+//FOR recurring emails
+
+
+			function newMail() {
+
+					var newMessage = getNewMessage();
+
+			        var newEmailWrapper = document.createElement("div");
+			        newEmailWrapper.className = "eBox";
+			        document.body.appendChild(newEmailWrapper);		
+
+			        var newEmailSender = document.createElement("div");
+			        newEmailSender.className = "eSender";
+			        newEmailSender.innerHTML = newMessage.sender;
+			        newEmailWrapper.appendChild(newEmailSender);	 
+
+			        var newEmailSubject = document.createElement("div");
+			        newEmailSubject.className = "eSubject";
+			        newEmailSubject.innerHTML = newMessage.subject;
+			        newEmailWrapper.appendChild(newEmailSubject); 
+
+			        var newEmailDate = document.createElement("div");
+			        newEmailDate.className = "eDate";
+			        newEmailDate.innerHTML = newMessage.date;
+			        newEmailWrapper.appendChild(newEmailDate);
+
+			        newEmailWrapper.addEventListener("click", ShowNewMail);			        
+
+			        var newEmailContent = document.createElement("p");
+			        newEmailContent.className = "eMessage";
+			        newEmailContent.innerHTML = newMessage.body;
+			        newEmailSubject.appendChild(newEmailContent);	
+
+				        function ShowNewMail(){
+				        	var showMessage = this.querySelectorAll(".eMessage")[0];
+				        	if (showMessage.style.display === "none"){
+				        		showMessage.style.display = "block";
+				        	}else{
+				        		showMessage.style.display = "none";
+		        			}
+
+		        		}	
+	
+					var counts = document.getElementById('counter');
+					counts.innerHTML = "All Messages " + "[ " + geemails.length++ + " ]";
+			}
+
+					setInterval(newMail, 3000);
+
       };
     </script>
+    		<div id="userHead"> 
+				<img src="https://lh3.google.com/u/0/d/0B0nAZcewwuURN1FRd2NOWTN6RWkxRFg5MnZYWUJSYTFuY3pB=w1296-h1164-iv1" id="imgHead" alt="avatar" height="55" width="55" >
+				<p class="userDetails">Ella Mae Arana</p>
+				<p id="email"> <a href="">ellamae@geemail.com</a></p>
+			</div>
+
+			<div id="geeLabel">
+				GeeMail Inbox	
+			</div>
+		
 	</head>
 	<body>
 		<div class="container" id="main">
-			Build Me!
+			<div id="counter"> </div>
+			<br>
+			<div class="eSender">SENDER</div> 
+			<div class="eSubject">SUBJECT</div>
+			<div class="eDate">DATE</div>
 		</div>
 	</body>
 </html>
